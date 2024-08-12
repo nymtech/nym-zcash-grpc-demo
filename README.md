@@ -6,24 +6,27 @@ Interacting with a Lightwalletd instance via gRPC over the mixnet. Demo-ed and t
 * `src/run_client.rs` passes CLI args to the `NymProxyClient`, which transports bytes between the CLI wallet and the `NymProxyServer` instance via the mixnet.
 * `src/run_server.rs` runs the `NymProxyServer` which listens for incoming traffic from the mixnet, passes this upstream to a Lightwalletd instance, and sends responses back to the `NymProxyClient` (which then passes to the wallet the gRPC request orginated from) using [anonymous replies (**S**ingle **U**se **R**eply **B**locks)](https://nymtech.net/docs/architecture/traffic-flow.html#private-replies-using-surbs).
 
-```
-Local Machine
-+-----------+
-| zcash-cli |
-+-----------+
-      ^
-      |
-      v                                             Remote Host
-+----------------+           +--------+          +----------------+
-| NymProxyClient |<--------->| Mixnet |<-------->| NymProxyServer |
-+----------------+           +--------+          +----------------+
-                                                         ^
-                                                         |
-                                                         |
-                                                         |
-                                              +----------v----------+
-                                              | Zcashd testnet node |
-                                              +---------------------+
+```                                                                                                                                    
+       ┌──────────────────────┐                                                            
+       │    Local Machine     │                                                            
+       │    +-----------+     │                                                            
+       │    | zcash-cli |     │                                                            
+       │    +-----------+     │                                                            
+       │          ^           │                                                            
+       │          |           │                       ┌─────────────────────────┐          
+       │          v           │                       │       Remote Host       │          
+       │  +----------------+  │        +--------+     │    +----------------+   │          
+       │  | NymProxyClient |<-│ ------>| Mixnet |<-- -│--->| NymProxyServer |   │          
+       │  +----------------+  │        +--------+     │    +----------------+   │          
+       │                      │                       │            ^            │          
+       └──────────────────────┘                       │            |            │          
+                                                      │            |            │          
+                                                      │            |            │          
+                                                      │ +----------v----------+ │          
+                                                      │ | Zcashd testnet node | │          
+                                                      │ +---------------------+ │          
+                                                      └─────────────────────────┘                                                                                           
+                                                                                           
 ```
 
 ## Usage

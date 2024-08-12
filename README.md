@@ -51,11 +51,11 @@ Options:
 
 ## Run
 ```sh
-# Have zebra + lightwalletd instances running in background. For the moment you cannot run lightwalletd using the TLS certificate, as requests are coming to/from localhost and not the cert address.
-# Since lightwalletd is only receiving and sending traffic to our Nym server instance on the same server, this is not too much of an issue for the moment as traffic is encrypted as it moves through the mixnet,
-# and the lightwalletd instance is on the same remote host as the Nym server instance.
+# Have zebra + lightwalletd instances running in background, either locally or on a remote host. 
+# For the moment you cannot run lightwalletd using the TLS certificate, as requests are coming to/from localhost and not the cert address.
+# Since lightwalletd is only receiving and sending traffic to our Nym server instance on the same server, this is not too much of an issue for the moment as traffic is encrypted as it moves through the mixnet, and the lightwalletd instance is on the same host as the Nym server instance.
 
-# Terminal window 1:
+# Terminal window 1 (on the same host as the lightwalletd instance):
 ./target/release/server -u <UPSTREAM_ADDRESS> # e.g. "127.0.0.1:9067" the default lightwalletd listening address
 
 # Terminal window 2:
@@ -63,3 +63,8 @@ Options:
 
 # Terminal window 3: send `zingo-cli` traffic to 127.0.0.1:8080 and interact as per usual
 ```
+
+## Future Development Work 
+- Speed up new session creation with Nym client connection pool. 
+- Integrate `NymProxyClient` and `NymProxyServer` types into Rust SDK. 
+- Expose `NymProxyClient` and `NymProxyServer` functionality via FFI for Go, Swift, and Kotlin. 

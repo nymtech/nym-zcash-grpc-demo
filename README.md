@@ -1,5 +1,7 @@
 # Nym-Zcash-gRPC Demo
 
+## ⚠️ This is now outdated, please check [this repo](https://github.com/nymtech/standalone-tcp-proxies) for standalone binaries, or the Rust SDK ⚠️
+
 Interacting with a Lightwalletd instance via gRPC over the mixnet. Demo-ed and tested using the [Zingo](https://github.com/zingolabs/zingolib?tab=readme-ov-file#zingo-cli) `zingo-cli` wallet.
 
 ## Overview
